@@ -38,8 +38,8 @@ const roles = [
   },
   {
     title: "개발자",
-    description: "바로 코딩을 시작하세요",
-    path: "frontend/src/",
+    description: "개발 문서 작성 후 코딩 시작",
+    path: "docs/dev.md · frontend/src/",
     icon: Terminal,
   },
   {

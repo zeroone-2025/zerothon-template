@@ -41,7 +41,10 @@ npm install
 ```bash
 npm run dev
 ```
-[http://localhost:3000](http://localhost:3000)에서 확인 후, `src/app/page.tsx`를 지우고 개발을 시작하세요.
+[http://localhost:3000](http://localhost:3000)에서 정상 동작을 확인하세요.
+
+### 4. 초기 파일 삭제 후 개발 시작
+`src/app/page.tsx`를 삭제하고 개발을 시작하세요.
 
 ## 기술 스택
 

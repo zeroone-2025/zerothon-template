@@ -5,7 +5,25 @@
 매주 수요일 2시간 미니 해커톤 **"제로톤(Zero-Thon)"** 을 위한 스타터 킷 템플릿입니다.
 GitHub의 "Use this template" 버튼으로 새 레포를 생성하면, 즉시 기능 개발에 착수할 수 있습니다.
 
-## 빠른 시작
+## 역할별 시작 가이드
+
+| 역할 | 시작 파일 | 설명 |
+|------|-----------|------|
+| 🎯 **기획자** | `docs/plan.md` · `docs/ppt.md` | 아이디어 구체화 + 발표 준비 |
+| 💻 **개발자** | `frontend/src/` | 바로 코딩을 시작하세요 |
+| 📢 **마케터** | `docs/marketing.md` | 사용자에게 다가가세요 |
+
+## 문서 작성 가이드
+
+`docs/` 폴더의 각 문서는 마크다운(.md) 형식의 템플릿입니다.
+`[ ]` 체크박스, 테이블, 가이드 질문을 따라 작성하면 됩니다.
+
+- **plan.md**: 프로젝트 개요, 타겟, MVP 범위, 타임라인 (기획자)
+- **dev.md**: 기술 스택, 화면 구성, API 설계, AI 프롬프트 기록 (개발자)
+- **marketing.md**: 페르소나, 카피라이팅, 유입 전략 (마케터)
+- **ppt.md**: 4분 발표 스크립트 — Pain → Solution → Demo → Scalability (기획자)
+
+## 시작하기
 
 ### 1. 템플릿으로 내 레포 생성
 이 레포 상단의 **"Use this template"** → **"Create a new repository"** 클릭하여 내 레포를 만드세요.
@@ -59,14 +77,6 @@ zerothon-template/
 └── README.md          # 이 파일
 ```
 
-## 역할별 시작 가이드
-
-| 역할 | 시작 파일 | 설명 |
-|------|-----------|------|
-| 🎯 **기획자** | `docs/plan.md` · `docs/ppt.md` | 아이디어 구체화 + 발표 준비 |
-| 💻 **개발자** | `frontend/src/` | 바로 코딩을 시작하세요 |
-| 📢 **마케터** | `docs/marketing.md` | 사용자에게 다가가세요 |
-
 ## 배포 (Vercel)
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/YOUR_USERNAME/YOUR_REPO&root-directory=frontend)
@@ -76,13 +86,3 @@ zerothon-template/
 2. "Import Project" → 생성한 레포 선택
 3. **Root Directory**를 `frontend`로 설정
 4. "Deploy" 클릭
-
-## 문서 작성 가이드
-
-`docs/` 폴더의 각 문서는 마크다운(.md) 형식의 템플릿입니다.
-`[ ]` 체크박스, 테이블, 가이드 질문을 따라 작성하면 됩니다.
-
-- **plan.md**: 프로젝트 개요, 타겟, MVP 범위, 타임라인 (기획자)
-- **dev.md**: 기술 스택, 화면 구성, API 설계, AI 프롬프트 기록 (개발자)
-- **marketing.md**: 페르소나, 카피라이팅, 유입 전략 (마케터)
-- **ppt.md**: 4분 발표 스크립트 — Pain → Solution → Demo → Scalability (기획자)

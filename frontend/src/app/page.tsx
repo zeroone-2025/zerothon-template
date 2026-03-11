@@ -17,6 +17,7 @@ import {
   Palette,
   Zap,
   Copy,
+  FileText,
 } from "lucide-react";
 
 const techStack = [
@@ -47,6 +48,13 @@ const roles = [
     path: "docs/marketing.md",
     icon: Users,
   },
+];
+
+const docs = [
+  { name: "plan.md", description: "프로젝트 개요, 타겟, MVP 범위, 타임라인", role: "기획자" },
+  { name: "dev.md", description: "기술 스택, 화면 구성, API 설계, AI 프롬프트 기록", role: "개발자" },
+  { name: "marketing.md", description: "페르소나, 카피라이팅, 유입 전략", role: "마케터" },
+  { name: "ppt.md", description: "4분 발표 스크립트 — Pain → Solution → Demo → Scalability", role: "기획자" },
 ];
 
 const steps = [
@@ -88,34 +96,65 @@ export default function Home() {
 
       <Separator className="mb-16" />
 
-      {/* Tech Stack */}
+      {/* Role Guide */}
       <section className="mb-16">
         <div className="flex items-center gap-2 mb-6">
-          <Layers className="h-5 w-5" />
-          <h2 className="text-2xl font-semibold">기술 스택</h2>
+          <Users className="h-5 w-5" />
+          <h2 className="text-2xl font-semibold">역할별 시작 가이드</h2>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {techStack.map((tech) => (
-            <Card key={tech.name}>
-              <CardHeader className="pb-2">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {roles.map((role) => (
+            <Card key={role.title}>
+              <CardHeader>
                 <div className="flex items-center gap-2">
-                  <tech.icon className="h-4 w-4 text-muted-foreground" />
-                  <CardTitle className="text-base">{tech.name}</CardTitle>
+                  <role.icon className="h-4 w-4 text-muted-foreground" />
+                  <CardTitle className="text-base">{role.title}</CardTitle>
                 </div>
               </CardHeader>
               <CardContent>
-                <CardDescription>{tech.description}</CardDescription>
+                <p className="text-sm text-muted-foreground mb-2">
+                  {role.description}
+                </p>
+                <code className="text-xs rounded bg-muted px-2 py-1">
+                  {role.path}
+                </code>
               </CardContent>
             </Card>
           ))}
         </div>
       </section>
 
-      {/* Quick Start */}
+      {/* Document Guide */}
+      <section className="mb-16">
+        <div className="flex items-center gap-2 mb-6">
+          <FileText className="h-5 w-5" />
+          <h2 className="text-2xl font-semibold">문서 작성 가이드</h2>
+        </div>
+        <p className="text-sm text-muted-foreground mb-4">
+          <code className="rounded bg-muted px-1.5 py-0.5 text-xs font-mono">docs/</code> 폴더의 각 문서는 마크다운 형식의 템플릿입니다. 체크박스, 테이블, 가이드 질문을 따라 작성하면 됩니다.
+        </p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {docs.map((doc) => (
+            <Card key={doc.name}>
+              <CardHeader className="pb-2">
+                <div className="flex items-center justify-between">
+                  <CardTitle className="text-base font-mono">{doc.name}</CardTitle>
+                  <Badge variant="outline" className="text-xs">{doc.role}</Badge>
+                </div>
+              </CardHeader>
+              <CardContent>
+                <CardDescription>{doc.description}</CardDescription>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </section>
+
+      {/* Getting Started */}
       <section className="mb-16">
         <div className="flex items-center gap-2 mb-6">
           <Rocket className="h-5 w-5" />
-          <h2 className="text-2xl font-semibold">빠른 시작</h2>
+          <h2 className="text-2xl font-semibold">시작하기</h2>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {steps.map((s) => (
@@ -137,6 +176,29 @@ export default function Home() {
                     {s.command}
                   </code>
                 )}
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </section>
+
+      {/* Tech Stack */}
+      <section className="mb-16">
+        <div className="flex items-center gap-2 mb-6">
+          <Layers className="h-5 w-5" />
+          <h2 className="text-2xl font-semibold">기술 스택</h2>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {techStack.map((tech) => (
+            <Card key={tech.name}>
+              <CardHeader className="pb-2">
+                <div className="flex items-center gap-2">
+                  <tech.icon className="h-4 w-4 text-muted-foreground" />
+                  <CardTitle className="text-base">{tech.name}</CardTitle>
+                </div>
+              </CardHeader>
+              <CardContent>
+                <CardDescription>{tech.description}</CardDescription>
               </CardContent>
             </Card>
           ))}
@@ -178,34 +240,6 @@ export default function Home() {
               </CardDescription>
             </CardContent>
           </Card>
-        </div>
-      </section>
-
-      {/* Role Guide */}
-      <section className="mb-16">
-        <div className="flex items-center gap-2 mb-6">
-          <Users className="h-5 w-5" />
-          <h2 className="text-2xl font-semibold">역할별 가이드</h2>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {roles.map((role) => (
-            <Card key={role.title}>
-              <CardHeader>
-                <div className="flex items-center gap-2">
-                  <role.icon className="h-4 w-4 text-muted-foreground" />
-                  <CardTitle className="text-base">{role.title}</CardTitle>
-                </div>
-              </CardHeader>
-              <CardContent>
-                <p className="text-sm text-muted-foreground mb-2">
-                  {role.description}
-                </p>
-                <code className="text-xs rounded bg-muted px-2 py-1">
-                  {role.path}
-                </code>
-              </CardContent>
-            </Card>
-          ))}
         </div>
       </section>
 

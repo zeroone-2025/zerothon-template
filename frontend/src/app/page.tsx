@@ -32,29 +32,37 @@ const techStack = [
 const roles = [
   {
     title: "기획자",
-    description: "아이디어 구체화 + 발표 준비",
-    path: "docs/plan.md · docs/ppt.md",
+    description: "팀 리더 — 아이디어 확정, 방향 결정, 발표 준비",
+    path: "docs/01_plan.md · docs/04_ppt.md",
     icon: BookOpen,
   },
   {
     title: "개발자",
     description: "개발 문서 작성 후 코딩 시작",
-    path: "docs/dev.md · frontend/src/",
+    path: "docs/02_dev.md · frontend/src/",
     icon: Terminal,
   },
   {
     title: "마케터",
     description: "사용자에게 다가가세요",
-    path: "docs/marketing.md",
+    path: "docs/03_marketing.md",
     icon: Users,
   },
 ];
 
 const docs = [
-  { name: "plan.md", description: "프로젝트 개요, 타겟, MVP 범위, 타임라인", role: "기획자" },
-  { name: "dev.md", description: "기술 스택, 화면 구성, API 설계, AI 프롬프트 기록", role: "개발자" },
-  { name: "marketing.md", description: "페르소나, 카피라이팅, 유입 전략", role: "마케터" },
-  { name: "ppt.md", description: "4분 발표 스크립트 — Pain → Solution → Demo → Scalability", role: "기획자" },
+  { name: "01_plan.md", description: "프로젝트 개요, 타겟, MVP 범위, 타임라인", role: "기획자" },
+  { name: "02_dev.md", description: "기술 스택, 화면 구성, API 설계, AI 프롬프트 기록", role: "개발자" },
+  { name: "03_marketing.md", description: "페르소나, 카피라이팅, 유입 전략", role: "마케터" },
+  { name: "04_ppt.md", description: "4분 발표 스크립트 — Pain → Solution → Demo → Scalability", role: "기획자" },
+];
+
+const claudeCommands = [
+  { command: "/help", description: "사용 가능한 모든 명령어 목록 확인" },
+  { command: "/clear", description: "대화 초기화 — 새 주제로 전환할 때" },
+  { command: "/compact", description: "긴 대화를 요약하여 컨텍스트 확보" },
+  { command: "/resume", description: "이전 대화를 이어서 계속 작업" },
+  { command: "/init", description: "프로젝트 분석 후 CLAUDE.md 자동 생성" },
 ];
 
 const steps = [
@@ -75,6 +83,12 @@ const steps = [
     title: "개발 시작",
     description: "로컬 개발 서버 실행",
     command: "npm run dev",
+  },
+  {
+    step: "4",
+    title: "AI 코딩 (Claude Code)",
+    description: "프로젝트 폴더에서 Claude Code를 실행하세요. 반드시 프로젝트 최상위 폴더에서!",
+    command: "cd <내-레포명> && claude",
   },
 ];
 
@@ -156,7 +170,7 @@ export default function Home() {
           <Rocket className="h-5 w-5" />
           <h2 className="text-2xl font-semibold">시작하기</h2>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           {steps.map((s) => (
             <Card key={s.step}>
               <CardHeader>
@@ -180,6 +194,80 @@ export default function Home() {
             </Card>
           ))}
         </div>
+      </section>
+
+      {/* Claude Code Guide */}
+      <section className="mb-16">
+        <div className="flex items-center gap-2 mb-6">
+          <Terminal className="h-5 w-5" />
+          <h2 className="text-2xl font-semibold">Claude Code 기본 사용법</h2>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-base">컨텍스트(Context)란?</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-sm text-muted-foreground">
+                Claude가 대화 중 참고하는 &quot;작업 기억&quot;입니다. 대화 내용, 읽은 파일, 명령 결과 등이 쌓이며, 대화가 길어지면 컨텍스트가 차오릅니다.{" "}
+                <code className="rounded bg-muted px-1.5 py-0.5 text-xs font-mono">/compact</code>로 정리하거나{" "}
+                <code className="rounded bg-muted px-1.5 py-0.5 text-xs font-mono">/clear</code>로 새로 시작하세요.
+              </p>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-base">@로 파일 참조하기</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-sm text-muted-foreground mb-2">
+                프롬프트에서 <code className="rounded bg-muted px-1.5 py-0.5 text-xs font-mono">@파일경로</code>를 입력하면 해당 파일 내용을 바로 전달할 수 있습니다.
+              </p>
+              <div className="space-y-1">
+                <code className="block rounded bg-muted px-3 py-1.5 text-xs font-mono">
+                  @src/app/page.tsx 이 파일을 분석해줘
+                </code>
+                <code className="block rounded bg-muted px-3 py-1.5 text-xs font-mono">
+                  @src/components → 폴더 구조 표시
+                </code>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-base">기본 명령어</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="border-b">
+                    <th className="text-left py-2 pr-4 font-medium">명령어</th>
+                    <th className="text-left py-2 font-medium">설명</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {claudeCommands.map((cmd) => (
+                    <tr key={cmd.command} className="border-b last:border-0">
+                      <td className="py-2 pr-4">
+                        <code className="rounded bg-muted px-2 py-0.5 text-xs font-mono font-semibold">
+                          {cmd.command}
+                        </code>
+                      </td>
+                      <td className="py-2 text-muted-foreground">
+                        {cmd.description}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </CardContent>
+        </Card>
       </section>
 
       {/* Tech Stack */}
